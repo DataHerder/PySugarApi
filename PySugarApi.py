@@ -27,10 +27,6 @@ class PySugarApi(object):
         self.url = url
 
 
-    def __params(self):
-        return
-
-
     def post(self, method='login', parameter={}, verify_ssl=True):
         """
         Post parameters to Sugar's API
@@ -52,6 +48,7 @@ class PySugarApi(object):
 
         self.r = requests.post(self.url, data=payload, verify=verify_ssl)
         return json.loads(self.r.text)
+
 
     def login(self, verify_ssl=True):
         """
