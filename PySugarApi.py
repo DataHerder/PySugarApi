@@ -43,7 +43,7 @@ class PySugarApi(object):
         if self.url is None:
             raise RuntimeError('URL to your sugar instance is required.')
 
-        r = requests.post(url, data=payload, verify=False)
+        r = requests.post(self.url, data=payload, verify=False)
         return r.text
 
 
