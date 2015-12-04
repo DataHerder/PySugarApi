@@ -7,7 +7,7 @@ pp = pprint.PrettyPrinter(indent=4).pprint
 
 class PySugarApi(object):
 
-    def __init__(self, username='', password='', url=None):
+    def __init__(self, username='', password='', url=None, verify_ssl=True):
         """
 
         :param development:
@@ -18,7 +18,7 @@ class PySugarApi(object):
         self.url = url
         self.session_id = None
         if username != '' and password != '' and url is not None:
-            self.login()
+            self.login(verify_ssl)
 
     def set_url(self, url=''):
         self.url = url
@@ -27,7 +27,7 @@ class PySugarApi(object):
         return
 
 
-    def post(self, method='login', parameter={}):
+    def post(self, method='login', parameter={}, verify_ssl=True):
         """
         Post parameters to Sugar's API
         :param method:
@@ -45,11 +45,11 @@ class PySugarApi(object):
         if self.url is None:
             raise RuntimeError('URL to your sugar instance is required.')
 
-        r = requests.post(self.url, data=payload, verify=False)
+        r = requests.post(self.url, data=payload, verify=verify_ssl)
         return r.text
 
 
-    def login(self):
+    def login(self, verify_ssl=True):
         m = hashlib.md5(self.password)
         passwrd = m.hexdigest()
         # Unfortunately, Sugar made a poor decision here
@@ -67,7 +67,7 @@ class PySugarApi(object):
         }
         payload['application_name'] = 'RestTest'
         payload['name_value_list'] = []
-        text = json.loads(self.post('login', payload))
+        text = json.loads(self.post('login', payload, verify_ssl=verify_ssl))
         try:
             self.session_id = text['id']
         except Exception as e:
