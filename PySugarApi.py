@@ -17,6 +17,8 @@ class PySugarApi(object):
         self.password = password
         self.url = url
         self.session_id = None
+        if username != '' and password != '' and url is not None:
+            self.login()
 
     def set_url(self, url=''):
         self.url = url
