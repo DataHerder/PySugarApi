@@ -51,7 +51,7 @@ class PySugarApi(object):
             raise RuntimeError('URL to your sugar instance is required.')
 
         self.r = requests.post(self.url, data=payload, verify=verify_ssl)
-        return self.r.text
+        return json.loads(self.r.text)
 
     def login(self, verify_ssl=True):
         """
@@ -75,7 +75,7 @@ class PySugarApi(object):
         }
         payload['application_name'] = 'RestTest'
         payload['name_value_list'] = []
-        text = json.loads(self.post('login', payload, verify_ssl=verify_ssl))
+        text = self.post('login', payload, verify_ssl=verify_ssl)
         try:
             self.session_id = text['id']
         except Exception as e:
