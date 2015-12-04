@@ -17,6 +17,8 @@ class PySugarApi(object):
         self.password = password
         self.url = url
         self.session_id = None
+        # request object, that way it can be retrieved outside the class
+        self.r = None
         if username != '' and password != '' and url is not None:
             self.login(verify_ssl)
 
@@ -48,9 +50,8 @@ class PySugarApi(object):
         if self.url is None:
             raise RuntimeError('URL to your sugar instance is required.')
 
-        r = requests.post(self.url, data=payload, verify=verify_ssl)
-        return r.text
-
+        self.r = requests.post(self.url, data=payload, verify=verify_ssl)
+        return self.r.text
 
     def login(self, verify_ssl=True):
         """
