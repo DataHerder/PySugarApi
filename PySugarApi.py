@@ -10,7 +10,10 @@ class PySugarApi(object):
     def __init__(self, username='', password='', url=None, verify_ssl=True):
         """
 
-        :param development:
+        :param username: str
+        :param password: str
+        :param url: str
+        :param verify_ssl: bool
         :return:
         """
         self.username = username
@@ -27,12 +30,13 @@ class PySugarApi(object):
         self.url = url
 
 
-    def post(self, method='login', parameter={}, verify_ssl=True):
+    def post(self, method='login', parameter=None, verify_ssl=True):
         """
         Post parameters to Sugar's API
 
-        :param method:
-        :param parameter:
+        :param method: str
+        :param parameter: dict
+        :param verify_ssl: bool
         :return:
         """
         json_data = json.dumps(parameter)
