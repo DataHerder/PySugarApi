@@ -20,8 +20,10 @@ class PySugarApi(object):
         if username != '' and password != '' and url is not None:
             self.login(verify_ssl)
 
+
     def set_url(self, url=''):
         self.url = url
+
 
     def __params(self):
         return
@@ -30,6 +32,7 @@ class PySugarApi(object):
     def post(self, method='login', parameter={}, verify_ssl=True):
         """
         Post parameters to Sugar's API
+
         :param method:
         :param parameter:
         :return:
@@ -50,6 +53,12 @@ class PySugarApi(object):
 
 
     def login(self, verify_ssl=True):
+        """
+        Log into Sugar API
+
+        :param verify_ssl:
+        :return:
+        """
         m = hashlib.md5(self.password)
         passwrd = m.hexdigest()
         # Unfortunately, Sugar made a poor decision here
