@@ -8,7 +8,7 @@ Dependencies include: requests, pprint, json, hashlib and collections
 
 ```python
 Sg = PySugarApi('username', 'password', 'http://your/instance/url')
-req = Sg.post('get_entries', {
+sugar_response_as_json_object = Sg.post('get_entries', {
   'session': Sg.session_id,
   'module_name': 'Accounts',
   'ids': 'account-id',
@@ -17,4 +17,6 @@ req = Sg.post('get_entries', {
   'favorites': False,
   'filter': array(),
 });
+# access requests object for further analysis
+request = Sg.r
 ```
