@@ -57,8 +57,6 @@ class PySugarApi(object):
         # You wouldn't recognize that if you just copy paste their
         # code from their site, but when you are adapting to a different
         # language rather than PHP, this becomes an obvious oversight.
-        # This is squirrelly and should be changed.  There isn't any
-        # reason why this should be in a certain order
         payload = collections.OrderedDict()
         payload['user_auth'] = {
             'user_name': 'pcarlton',
